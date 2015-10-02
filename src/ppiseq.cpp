@@ -39,21 +39,22 @@ bool Sequence::is_base_match(TCHAR b1, TCHAR b2)
 				n[i] = 2;
 				break;
 			case 'D':
-				b[i][0] = 'A'; b[i][1] = 'G'; b[i][1] = 'T';
+				b[i][0] = 'A'; b[i][1] = 'G'; b[i][2] = 'T';
 				n[i] = 3;
 				break;
 			case 'H':
-				b[i][0] = 'A'; b[i][1] = 'C'; b[i][1] = 'T';
+				b[i][0] = 'A'; b[i][1] = 'C'; b[i][2] = 'T';
 				n[i] = 3;
 				break;
 		}
 	}
 
+	int match = 0;
 	for (i = 0; i < n[0]; i++)
 		for (j = 0; j < n[1]; j++)
-			if (b[0][i] == b[1][j]) return true;
+			if (b[0][i] == b[1][j]) match++;
 
-	return false;
+	return (match == n[0] || match == n[1]) ? true : false;
 }
 
 bool Sequence::is_base_valid(TCHAR b)
