@@ -15,10 +15,9 @@
 #include <algorithm>
 
 typedef std::basic_string<TCHAR> tstring;
-
 typedef std::basic_ostream<TCHAR> tostream; // 標準出力ストリーム
 typedef std::basic_istream<TCHAR> tistream; // 標準入力ストリーム
-typedef std::basic_stringstream<_TCHAR> tstringstream;  // 文字列出力ストリーム
+typedef std::basic_stringstream<_TCHAR> tstringstream;  // 文字列入出力ストリーム
 typedef std::basic_ostringstream<TCHAR> tostringstream; // 文字列出力ストリーム（整形格納用バッファ）
 typedef std::basic_istringstream<TCHAR> tistringstream; // 文字列入力ストリーム（整形取得用バッファ）
 typedef std::basic_ifstream<TCHAR> tifstream; // ファイル入力ストリーム
@@ -41,18 +40,15 @@ typedef std::basic_fstream<TCHAR> tfstream; // ファイルストリーム
 
 class Sequence {
 public:
-	Sequence()
-	{
+	Sequence() {
 		m_seq = _T("");
 		ini_seq();
 	}
-	Sequence(const tstring &seq)
-	{
+	Sequence(const tstring &seq) {
 		m_seq = seq;
 		ini_seq();
 	}
-	Sequence(const Sequence &s)
-	{
+	Sequence(const Sequence &s) {
 		m_seq = s.m_seq;
 		m_is_valid = s.m_is_valid;
 		m_dval = s.m_dval;

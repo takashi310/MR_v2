@@ -125,8 +125,7 @@ bool Sequence::find_best_match_offset(const Sequence &target, int &offset, int &
 	
 	for (_offset = min_offset; _offset <= max_offset; _offset++) {
 		int match = 0;
-		int tar_id, src_id;
-		for (tar_id = _offset, src_id = 0; tar_id < tar_len && src_id < src_len; tar_id++, src_id++) {
+		for (int tar_id = _offset, src_id = 0; tar_id < tar_len && src_id < src_len; tar_id++, src_id++) {
 			if (tar_id < 0) continue;
 			if (is_base_match(m_seq[src_id], target.m_seq[tar_id])) match++;
 		}

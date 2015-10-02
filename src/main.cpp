@@ -7,7 +7,7 @@ vector<tstring> tsplit(const tstring &str, const tstring &delim)
 {
 	vector<tstring> res;
 	size_t current = 0, found;
-	while((found = str.find_first_of(delim, current)) != string::npos){
+	while((found = str.find_first_of(delim, current)) != string::npos) {
 		res.push_back(tstring(str, current, found - current));
 		current = found + 1;
 	}
@@ -19,7 +19,7 @@ vector<string> split(const string &str, const string &delim)
 {
 	vector<string> res;
 	size_t current = 0, found;
-	while((found = str.find_first_of(delim, current)) != string::npos){
+	while((found = str.find_first_of(delim, current)) != string::npos) {
 		res.push_back(string(str, current, found - current));
 		current = found + 1;
 	}
@@ -31,11 +31,10 @@ vector<string> split(const string &str, const string &delim)
 int _tmain(int argc, TCHAR* argv[])
 {
 	string loc("");
-	
 	ios_base::sync_with_stdio(false);
 	locale default_loc("");
 	locale::global(default_loc);
-	locale ctype_default(locale::classic(), default_loc, locale::ctype); //Å¶
+	locale ctype_default(locale::classic(), default_loc, locale::ctype);
 	tcout.imbue(ctype_default);
 	tcin.imbue(ctype_default);
 	tcin.unsetf(std::ios::skipws);
@@ -78,16 +77,14 @@ int _tmain(int argc, TCHAR* argv[])
 			vector<Sequence> seq_list;
 			vector<Sequence> results;
 			tifstream ifs(argv[i]);
-			if (ifs.fail())
-			{
+			if (ifs.fail()) {
 				tcerr << _T("file open error: ") << argv[i] << endl;
 				continue;
 			}
 
 			tcout << _T("loading data...") << endl;;
 			tstring line, token;
-			while (getline(ifs, line))
-			{
+			while (getline(ifs, line)) {
 				vector<tstring> tokens = tsplit(line, _T(" \t,"));
 				int tknum = tokens.size();
 				bool val_set = false;
@@ -150,12 +147,10 @@ int _tmain(int argc, TCHAR* argv[])
 				}
 				else if (offset == 0 && c_offset != 0) {results.push_back(seq_list[j]);}
 				else if (offset != 0 && c_offset == 0) {results.push_back(seq);}
-				else if (offset == 0 && c_offset == 0)
-				{
+				else if (offset == 0 && c_offset == 0) {
 					if      (mnum > c_mnum) {results.push_back(seq_list[j]);}
 					else if (mnum < c_mnum) {results.push_back(seq);}
-					else if (mnum == c_mnum)
-					{
+					else if (mnum == c_mnum) {
 						double halfval = seq_list[j].get_dval()/2.0;
 						seq_list[j].set_dval(halfval);
 						seq.set_dval(halfval);
@@ -166,33 +161,29 @@ int _tmain(int argc, TCHAR* argv[])
 			}
 			tcout << _T(".") << endl;;
 
-/*			for (unsigned int j = 0; j < results.size(); j++) {
-				tcout << results[j].get_ival() << _T("\t")<< results[j].get_sequence() << _T("\t") << results[j].get_dval() << endl;
-			}
-*/
 			int reflen = refseq.get_sequence().length();
 			vector<double> a(reflen ,0.0), t(reflen, 0.0), c(reflen, 0.0), g(reflen, 0.0);
 			for (unsigned int j = 0; j < results.size(); j++) {
 				tstring seqstr = results[j].get_sequence();
-				if (reflen == seqstr.length())
-				for (int k = 0; k < reflen; k++) {
-					if (Sequence::is_base_match(seqstr[k], 'A')) a[k] += results[j].get_dval();
-					if (Sequence::is_base_match(seqstr[k], 'T')) t[k] += results[j].get_dval();
-					if (Sequence::is_base_match(seqstr[k], 'G')) g[k] += results[j].get_dval();
-					if (Sequence::is_base_match(seqstr[k], 'C')) c[k] += results[j].get_dval();
+				if (reflen == seqstr.length()) {
+					for (int k = 0; k < reflen; k++) {
+						if (Sequence::is_base_match(seqstr[k], 'A')) a[k] += results[j].get_dval();
+						if (Sequence::is_base_match(seqstr[k], 'T')) t[k] += results[j].get_dval();
+						if (Sequence::is_base_match(seqstr[k], 'G')) g[k] += results[j].get_dval();
+						if (Sequence::is_base_match(seqstr[k], 'C')) c[k] += results[j].get_dval();
+					}
 				}
 			}
 
-			tcout << _T("saving results...") << endl;
 			//output
+			tcout << _T("saving results...") << endl;
 			tstring tar_fpath = argv[i];
 			int ext_pos = tar_fpath.find_last_of(_T("."));
 			if (ext_pos != string::npos) tar_fpath = tar_fpath.substr(0, ext_pos);
 			tar_fpath += _T("_result.txt");
 			tofstream ofs(tar_fpath);
 			ofs.imbue(ctype_default);
-			if (ofs.fail())
-			{
+			if (ofs.fail()) {
 				tcerr << _T("file open error: ") << tar_fpath << endl;
 			}
 			else
