@@ -7,7 +7,7 @@ vector<tstring> tsplit(const tstring &str, const tstring &delim)
 {
 	vector<tstring> res;
 	size_t current = 0, found;
-	while((found = str.find_first_of(delim, current)) != string::npos) {
+	while ((found = str.find_first_of(delim, current)) != string::npos) {
 		res.push_back(tstring(str, current, found - current));
 		current = found + 1;
 	}
@@ -19,7 +19,7 @@ vector<string> split(const string &str, const string &delim)
 {
 	vector<string> res;
 	size_t current = 0, found;
-	while((found = str.find_first_of(delim, current)) != string::npos) {
+	while ((found = str.find_first_of(delim, current)) != string::npos) {
 		res.push_back(string(str, current, found - current));
 		current = found + 1;
 	}
@@ -30,7 +30,6 @@ vector<string> split(const string &str, const string &delim)
 
 int _tmain(int argc, TCHAR* argv[])
 {
-	string loc("");
 	ios_base::sync_with_stdio(false);
 	locale default_loc("");
 	locale::global(default_loc);
