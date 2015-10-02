@@ -14,7 +14,7 @@
 #include <vector>
 #include <algorithm>
 
-typedef std::basic_string<_TCHAR> tstring;
+typedef std::basic_string<TCHAR> tstring;
 
 typedef std::basic_ostream<TCHAR> tostream; // 標準出力ストリーム
 typedef std::basic_istream<TCHAR> tistream; // 標準入力ストリーム

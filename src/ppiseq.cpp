@@ -136,7 +136,7 @@ bool Sequence::find_best_match_offset(const Sequence &target, int &offset, int &
 			offset_best = _offset;
 		}
 		else if (match == max_match) {
-			if (abs(_offset) < abs(offset_best)) offset_best = _offset;
+			if (abs(_offset) > abs(offset_best)) offset_best = _offset;
 		}
 	}
 
