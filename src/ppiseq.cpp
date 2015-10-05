@@ -49,12 +49,11 @@ bool Sequence::is_base_match(TCHAR b1, TCHAR b2)
 		}
 	}
 
-	int match = 0;
 	for (i = 0; i < n[0]; i++)
 		for (j = 0; j < n[1]; j++)
-			if (b[0][i] == b[1][j]) match++;
+			if (b[0][i] == b[1][j]) return true;
 
-	return (match == n[0] || match == n[1]) ? true : false;
+	return false;
 }
 
 bool Sequence::is_base_valid(TCHAR b)
