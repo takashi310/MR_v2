@@ -137,20 +137,27 @@ int _tmain(int argc, TCHAR* argv[])
 				seq.find_best_match_offset(refseq, offset, mnum);
 				seq.make_complement();
 				seq.find_best_match_offset(refseq, c_offset, c_mnum);
-				if (offset != 0 && c_offset != 0) {
+				if ( (offset != 0 && c_offset != 0) ||
+					 (offset == 0 && c_offset != 0 && c_mnum > mnum) ||
+					 (offset != 0 && c_offset == 0 && c_mnum < mnum)) {
 					if (rank_down) {
 						before_dval = tmp_bf_dval;
 						rank--;
 					}
 					continue;
 				}
-				else if (offset == 0 && c_offset != 0) {results.push_back(seq_list[j]);}
-				else if (offset != 0 && c_offset == 0) {results.push_back(seq);}
-				else if (offset == 0 && c_offset == 0) {
-					if      (mnum > c_mnum) {results.push_back(seq_list[j]);}
-					else if (mnum < c_mnum) {results.push_back(seq);}
-					else if (mnum == c_mnum) {
-						double halfval = seq_list[j].get_dval()/2.0;
+
+				if (offset == 0 && c_mnum < mnum) {
+					results.push_back(seq_list[j]);
+				}
+				else if (c_offset == 0 && c_mnum > mnum) {
+					results.push_back(seq);
+				}
+				else if (mnum == c_mnum) {
+					if (offset == 0 && c_offset != 0) {results.push_back(seq_list[j]);}
+					else if (offset != 0 && c_offset == 0) {results.push_back(seq);}
+					else if (offset == 0 && c_offset == 0) {
+					double halfval = seq_list[j].get_dval()/2.0;
 						seq_list[j].set_dval(halfval);
 						seq.set_dval(halfval);
 						results.push_back(seq_list[j]);
